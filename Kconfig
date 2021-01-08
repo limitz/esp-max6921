@@ -1,62 +1,48 @@
-menu "LIMITZ TMC-5160 motor controller"
+menu "LIMITZ MAX-6921 VFD Driver"
 
-	config LMTZ_TMC5160_NUM_CHAIN
-		int
-		prompt "Number of daisychained controllers"
-		default 1
-	
-	choice LMTZ_TMC5160_SPI
+	choice LMTZ_MAX6921_SPI
 		prompt "SPI host"
-		default LMTZ_TMC5160_SPI_HSPI
+		default LMTZ_MAX6921_SPI_HSPI
 
-		config LMTZ_TMC5160_SPI_HSPI
+		config LMTZ_MAX6921_SPI_HSPI
 			bool "HSPI / SPI2)"
 		
-		config LMTZ_TMC5160_SPI_VSPI
+		config LMTZ_MAX6921_SPI_VSPI
 			bool "VSPI / SPI3"
 	endchoice
 
-	config LMTZ_TMC5160_CLOCK_SPEED
+	config LMTZ_MAX6921_CLOCK_SPEED
 		int
 		prompt "SPI Clock speed"
 		default 1000000
 	
-	config LMTZ_TMC5160_SPI_USE_GPIO
+	config LMTZ_MAX6921_SPI_USE_GPIO
 		bool  "SPI uses GPIO matrix pins"
 		default y
 
-	config LMTZ_TMC5160_SPI_USE_DMA
-		bool "SPI uses DMA"
-		default y
-
-	config LMTZ_TMC5160_SPI_DMA_CHANNEL
-		depends on LMTZ_TMC5160_SPI_USE_DMA
-		int "DMA channel" 
-		default 1
-
-	config LMTZ_TMC5160_PIN_MOSI
-		depends on LMTZ_TMC5160_SPI_USE_GPIO
-		int "SPI: MOSI pin"
+	config LMTZ_MAX6921_PIN_MOSI
+		depends on LMTZ_MAX6921_SPI_USE_GPIO
+		int "SPI: MOSI/DIN pin"
 		default 23
 
-	config LMTZ_TMC5160_PIN_MISO
-		depends on LMTZ_TMC5160_SPI_USE_GPIO
-		int "SPI: MISO pin"
+	config LMTZ_MAX6921_PIN_MISO
+		depends on LMTZ_MAX6921_SPI_USE_GPIO
+		int "SPI: MISO/DOUT pin"
 		default 19
 
-	config LMTZ_TMC5160_PIN_SCK
-		depends on LMTZ_TMC5160_SPI_USE_GPIO
+	config LMTZ_MAX6921_PIN_SCK
+		depends on LMTZ_MAX6921_SPI_USE_GPIO
 		int "SPI: SCK pin"
 		default 18
 
-	config LMTZ_TMC5160_PIN_CS
-		depends on LMTZ_TMC5160_SPI_USE_GPIO
-		int "SPI: CS pin"
+	config LMTZ_MAX6921_PIN_CS
+		depends on LMTZ_MAX6921_SPI_USE_GPIO
+		int "SPI: CS/LOAD pin"
 		default 5
 
-	config LMTZ_TMC5160_PIN_EN
-		int "TMC: EN pin"
-		default 27
+	config LMTZ_MAX6921_PIN_EN
+		int "Optional: EN pin"
+		default 0
 
 
 	
